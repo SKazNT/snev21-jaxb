@@ -64,14 +64,25 @@
                 </executions>
             </plugin>
 
-            <!-- CXF Codegen plugin -->
+
+            
+
+   
+
+
+
+                        <!-- Backward compatibility for OCPP 1.x (JAXB from WSDL) -->
             <plugin>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-codegen-plugin</artifactId>
                 <version>${cxf.version}</version>
                 <configuration>
-                    <sourceRoot>${project.build.directory}/generated-sources</sourceRoot>
+                    <!-- Keep generated sources separate -->
+                    <sourceRoot>${project.build.directory}/generated-sources/ocpp</sourceRoot>
+
+                    <!-- WSDL directory for backward compatibility -->
                     <wsdlRoot>${basedir}/src/main/resources/wsdl</wsdlRoot>
+
                     <defaultOptions>
                         <bindingFiles>
                             <bindingFile>${basedir}/src/main/resources/wsdl-binding/ocpp_binding.xml</bindingFile>
@@ -86,16 +97,23 @@
                             <extraarg>true</extraarg>
                         </extraargs>
                     </defaultOptions>
+
+                    <!-- Important: force package naming to classic OCPP -->
+                    <packagenames>
+                        <packagename>com.solnetev.phoenix.ocpp</packagename>
+                    </packagenames>
                 </configuration>
+
                 <executions>
                     <execution>
-                        <id>generate-sources</id>
+                        <id>generate-ocpp-sources</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>wsdl2java</goal>
                         </goals>
                     </execution>
                 </executions>
+
                 <dependencies>
                     <dependency>
                         <groupId>org.projectlombok</groupId>
@@ -114,6 +132,9 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
+
+
 
             <!-- Replacer plugin for adding interfaces to JSON schemas -->
             <plugin>
@@ -211,7 +232,7 @@
                         <goals><goal>generate</goal></goals>
                         <configuration>
                             <sourceDirectory>${project.build.directory}/generated-resources/ocpp201</sourceDirectory>
-                            <targetPackage>com.solnetev.phoenix.ocpp201</targetPackage>
+                            <targetPackage>com.solnetev.phoenix.ocpp._2020._03</targetPackage>
                             <outputDirectory>${project.build.directory}/generated-sources/ocpp201</outputDirectory>
                             <generateBuilders>true</generateBuilders>
                             <includeJsr303Annotations>true</includeJsr303Annotations>
@@ -231,7 +252,7 @@
                         <goals><goal>generate</goal></goals>
                         <configuration>
                             <sourceDirectory>${project.build.directory}/generated-resources/ocpp21</sourceDirectory>
-                            <targetPackage>com.solnetev.phoenix.ocpp21</targetPackage>
+                            <targetPackage>com.solnetev.phoenix.ocpp._2025._01</targetPackage>
                             <outputDirectory>${project.build.directory}/generated-sources/ocpp21</outputDirectory>
                             <generateBuilders>true</generateBuilders>
                             <includeJsr303Annotations>true</includeJsr303Annotations>
@@ -303,6 +324,11 @@
             <artifactId>junit-jupiter-params</artifactId>
             <version>5.10.3</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.9</version>
         </dependency>
     </dependencies>
 

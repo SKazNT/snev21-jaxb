@@ -8,7 +8,6 @@ import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 import static org.joda.time.format.ISODateTimeFormat.date;
 
-
 public class JodaDateTimeConverter extends XmlAdapter<String, DateTime> {
 
     private static final DateTimeFormatter formatter = dateTimeParser();
