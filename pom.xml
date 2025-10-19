@@ -232,7 +232,7 @@
                         <goals><goal>generate</goal></goals>
                         <configuration>
                             <sourceDirectory>${project.build.directory}/generated-resources/ocpp201</sourceDirectory>
-                            <targetPackage>com.solnetev.phoenix.ocpp._2020._03</targetPackage>
+                            <targetPackage>ocpp._2020._03</targetPackage>
                             <outputDirectory>${project.build.directory}/generated-sources/ocpp201</outputDirectory>
                             <generateBuilders>true</generateBuilders>
                             <includeJsr303Annotations>true</includeJsr303Annotations>
@@ -252,7 +252,7 @@
                         <goals><goal>generate</goal></goals>
                         <configuration>
                             <sourceDirectory>${project.build.directory}/generated-resources/ocpp21</sourceDirectory>
-                            <targetPackage>com.solnetev.phoenix.ocpp._2025._01</targetPackage>
+                            <targetPackage>ocpp._2025._01</targetPackage>
                             <outputDirectory>${project.build.directory}/generated-sources/ocpp21</outputDirectory>
                             <generateBuilders>true</generateBuilders>
                             <includeJsr303Annotations>true</includeJsr303Annotations>
